@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Bot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Email Bot</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="sender_email" class="form-label">Your Gmail Address</label>
+                <input type="email" class="form-control" id="sender_email" name="sender_email" placeholder="your_email@gmail.com" required>
+            </div>
+            <div class="mb-3">
+                <label for="sender_password" class="form-label">Your Gmail App Password</label>
+                <input type="password" class="form-control" id="sender_password" name="sender_password" placeholder="App Password" required>
+            </div>
+            <div class="mb-3">
+                <label for="csv_file" class="form-label">Upload CSV File</label>
+                <input type="file" class="form-control" id="csv_file" name="csv_file" accept=".csv" required>
+            </div>
+            <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" class="form-control" id="subject" name="subject" placeholder="Email Subject" required>
+            </div>
+            <div class="mb-3">
+                <label for="body" class="form-label">Message</label>
+                <textarea class="form-control" id="body" name="body" rows="5" placeholder="Email Body (Use {name} for personalization)" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Emails</button>
+        </form>
+        <br>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div>
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>
